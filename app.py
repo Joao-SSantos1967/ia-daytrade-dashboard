@@ -7,7 +7,7 @@ from assets.cripto import carregar_ativo as carregar_cripto
 from assets.forex import carregar_ativo as carregar_forex
 
 st.set_page_config(page_title="IA Day Trade", page_icon="📈", layout="centered")
-st.title("📊 IA Assistente para Day Trade Manual")
+st.title("📈 IA Assistente para Day Trade Manual")
 
 tipo_ativo = st.selectbox("Tipo de ativo", ["B3", "Criptomoeda", "Forex"])
 
@@ -24,6 +24,8 @@ else:
 ticker = st.selectbox("Escolha o ativo", ativos)
 
 st.write(f"Você selecionou: {ticker}")
+
+
 
 
 
