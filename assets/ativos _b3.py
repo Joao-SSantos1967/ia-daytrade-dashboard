@@ -1,12 +1,7 @@
-import yfinance as yf
-import pandas as pd
+ativos_b3 = [
+    "COGN3.SA", "MGLU3.SA", "CVCB3.SA", "CYRE3.SA", "ASAI3.SA",
+    "YDUQ3.SA", "CRFB3.SA", "TOTS3.SA", "TIMS3.SA", "BPAC11.SA"
+]
 
-def carregar_ativo(ticker):
-    try:
-        df = yf.download(ticker, interval="5m", period="1d")
-        df = df.dropna()
-        return df
-    except Exception as e:
-        print(f"Erro ao carregar ativo {ticker}: {e}")
-        return pd.DataF
+
 
