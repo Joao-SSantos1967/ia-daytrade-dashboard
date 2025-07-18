@@ -38,8 +38,22 @@ if df is not None and not df.empty:
     df = calcular_indicadores(df)
 
     # Exibir gráfico de fechamento
-    st.subheader("📉 Gráfico de Fechamento")
-    st.line_chart(df["Close"])
+    import plotly.graph_objects as go
+
+st.subheader("🕯️ Gráfico de Velas")
+
+fig = go.Figure(data=[go.Candlestick(
+    x=df.index,
+    open=df["Open"],
+    high=df["High"],
+    low=df["Low"],
+    close=df["Close"]
+)])
+
+fig.update_layout(xaxis_rangeslider_visible=False)
+
+st.plotly_chart(fig, use_container_width=True)
+
 
     # Exibir sinal operacional
     sinal = df["Sinal"].iloc[-1]
