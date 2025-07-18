@@ -5,16 +5,7 @@ from assets.ativos_cripto import ativos_cripto
 from assets.ativos_forex import ativos_forex
 import yfinance as yf
 import pandas as pd
-
-def carregar_b3(ticker):
-    try:
-        df = yf.download(ticker, interval="5m", period="1d")
-        df = df.dropna()
-        return df
-    except Exception as e:
-        print(f"Erro ao carregar ativo {ticker}: {e}")
-        return pd.DataFrame()
-
+from assets.b3 import carregar_ativo as carregar_b3
 from assets.cripto import carregar_ativo as carregar_cripto
 from assets.forex import carregar_ativo as carregar_forex
 from assets.indicadores import calcular_indicadores
