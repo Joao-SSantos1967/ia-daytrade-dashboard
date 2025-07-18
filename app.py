@@ -24,6 +24,32 @@ else:
 ticker = st.selectbox("Escolha o ativo", ativos)
 
 st.write(f"Você selecionou: {ticker}")
+from assets.indicadores import calcular_indicadores
+
+# Carregar dados do ativo
+df = carregar(ticker)
+
+if df is not None and not df.empty:
+    # Calcular indicadores técnicos
+    df = calcular_indicadores(df)
+
+    # Exibir gráfico de fechamento
+    st.subheader("📉 Gráfico de Fechamento")
+    st.line_chart(df["Close"])
+
+    # Exibir sinal operacional
+    sinal = df["Sinal"].iloc[-1]
+    proximo_candle = df.index[-1] + pd.Timedelta(minutes=5)
+
+    if sinal == "compra":
+        st.success(f"🟢 Sinal de COMPRA às {proximo_candle.time()}")
+    elif sinal == "venda":
+        st.error(f"🔴 Sinal de VENDA às {proximo_candle.time()}")
+    else:
+        st.info(f"⚪ Tendência LATERAL às {proximo_candle.time()}")
+else:
+    st.warning("Não foi possível carregar os dados do ativo.")
+
 
 
 
