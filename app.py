@@ -37,23 +37,21 @@ if df is not None and not df.empty:
     # Calcular indicadores técnicos
     df = calcular_indicadores(df)
 
-    # Exibir gráfico de fechamento
+    # Exibir gráfico de velas
     import plotly.graph_objects as go
 
-st.subheader("🕯️ Gráfico de Velas")
+    st.subheader("🕯️ Gráfico de Velas")
 
-fig = go.Figure(data=[go.Candlestick(
-    x=df.index,
-    open=df["Open"],
-    high=df["High"],
-    low=df["Low"],
-    close=df["Close"]
-)])
+    fig = go.Figure(data=[go.Candlestick(
+        x=df.index,
+        open=df["Open"],
+        high=df["High"],
+        low=df["Low"],
+        close=df["Close"]
+    )])
 
-fig.update_layout(xaxis_rangeslider_visible=False)
-
-st.plotly_chart(fig, use_container_width=True)
-
+    fig.update_layout(xaxis_rangeslider_visible=False)
+    st.plotly_chart(fig, use_container_width=True)
 
     # Exibir sinal operacional
     sinal = df["Sinal"].iloc[-1]
@@ -67,6 +65,7 @@ st.plotly_chart(fig, use_container_width=True)
         st.info(f"⚪ Tendência LATERAL às {proximo_candle.time()}")
 else:
     st.warning("Não foi possível carregar os dados do ativo.")
+
 
 
 
